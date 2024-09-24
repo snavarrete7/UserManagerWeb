@@ -39,6 +39,17 @@ function App() {
     setCustomerPassForm(e.target.value)
   }
 
+  const clickCancel = (id) =>{
+    if(id !== ""){
+      setCustomerNameForm("")
+      setCustomerEmailForm("")
+      setCustomerPassForm("")
+      setCustomerIdForm("")
+    }else{
+      console.log("No customer selected")
+    }
+  }
+
   return (
     <div className="App">
         <h2>Customer list</h2>
@@ -83,7 +94,7 @@ function App() {
         <div name="divButtons" padding="left">
             <button onClick={() => console.log("Delete")}>Delete</button>
             <button onClick={() => console.log("Save")}>Save</button>
-            <button onClick={() => console.log("Cancel")}>Cancel</button>
+            <button onClick={() => clickCancel(customerIdForm)}>Cancel</button>
           </div>
 
        
