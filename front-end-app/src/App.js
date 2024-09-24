@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React from 'react'
 
@@ -9,6 +8,36 @@ function App() {
     {"id":"2", "name":"Marc", "email":"marc.cives@adp.com", "password":"3333"},
     {"id":"3", "name":"Magesh", "email":"magesh.instructor@adp.com", "password":"1010"}
   ])
+
+  let [customerIdForm, setCustomerIdForm] = React.useState("")
+  let [customerNameForm, setCustomerNameForm] = React.useState("")
+  let [customerEmailForm, setCustomerEmailForm] = React.useState("")
+  let [customerPassForm, setCustomerPassForm] = React.useState("")
+
+
+  const selectUserInForm = (name, email, pass, id) =>{
+    if(id === customerIdForm){
+      setCustomerNameForm("")
+      setCustomerEmailForm("")
+      setCustomerPassForm("")
+      setCustomerIdForm("")
+    }else{
+      setCustomerNameForm(name)
+      setCustomerEmailForm(email)
+      setCustomerPassForm(pass)
+      setCustomerIdForm(id)
+    }
+  }
+
+  const handleChangeNameForm = (e) => {
+    setCustomerNameForm(e.target.value)
+  }
+  const handleChangeEmailForm = (e) => {
+    setCustomerEmailForm(e.target.value)
+  }
+  const handleChangePassForm = (e) => {
+    setCustomerPassForm(e.target.value)
+  }
 
   return (
     <div className="App">
@@ -25,10 +54,10 @@ function App() {
           <tbody>
             {
               customerList.map(customer =>(
-                <tr key={customer.id} onClick={() => console.log(customer.name)}>
-                  <td>{customer.name}</td>
-                  <td>{customer.email}</td>
-                  <td>{customer.password}</td>
+                <tr key={customer.id} onClick={() => selectUserInForm(customer.name, customer.email, customer.password, customer.id)}>
+                  <td style={{ fontWeight: customerIdForm === customer.id ? 'bold' : 'normal' }}>{customer.name}</td>
+                  <td style={{ fontWeight: customerIdForm === customer.id ? 'bold' : 'normal' }}>{customer.email}</td>
+                  <td style={{ fontWeight: customerIdForm === customer.id ? 'bold' : 'normal' }}>{customer.password}</td>
                 </tr>
               ))
             }
@@ -39,15 +68,15 @@ function App() {
         <form>
           <div>
             <label>Name:</label>
-            <input type="text" name="name"></input>
+            <input type="text" name="name" value={customerNameForm} onChange={handleChangeNameForm}></input>
           </div>
           <div>
             <label>Email:</label>
-            <input type="email" name="email"></input>
+            <input type="email" name="email" value={customerEmailForm} onChange={handleChangeEmailForm}></input>
           </div>
           <div>
             <label>Password:</label>
-            <input type="text" name="password"></input>
+            <input type="text" name="password" value={customerPassForm} onChange={handleChangePassForm}></input>
           </div>
         </form>
 
