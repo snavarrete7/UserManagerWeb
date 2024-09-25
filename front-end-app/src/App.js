@@ -24,16 +24,16 @@ function App() {
   let [customerEmailForm, setCustomerEmailForm] = React.useState("")
   let [customerPassForm, setCustomerPassForm] = React.useState("")
 
-  let[formMode, setFormMode] = React.useState("Add")
+  let [formMode, setFormMode] = React.useState("Add")
 
-  const selectUserInForm = (name, email, pass, id) =>{
-    if(id === customerIdForm){
+  const selectUserInForm = (name, email, pass, id) => {
+    if (id === customerIdForm) {
       setCustomerNameForm("")
       setCustomerEmailForm("")
       setCustomerPassForm("")
       setCustomerIdForm("")
       setFormMode("Add")
-    }else{
+    } else {
       setCustomerNameForm(name)
       setCustomerEmailForm(email)
       setCustomerPassForm(pass)
@@ -52,7 +52,7 @@ function App() {
     setCustomerPassForm(e.target.value)
   }
 
-  const clickCancel = (id) =>{
+  const clickCancel = (id) => {
     // if(id !== ""){
     //   setCustomerNameForm("")
     //   setCustomerEmailForm("")
@@ -71,7 +71,7 @@ function App() {
   }
 
   const clickDelete = (id) => {
-    if(id !== ""){
+    if (id !== "") {
       // const customerDeleted = get(id)
       // console.log('Delete Customer ID: ' + id + " Name: " + customerDeleted.name);
       deleteById(id, setCustomerList);
@@ -85,27 +85,27 @@ function App() {
       setCustomerEmailForm("")
       setCustomerPassForm("")
       setFormMode("Add")
-    }else{
+    } else {
       console.log("No customer selected")
     }
   }
 
-  const clickSave = (mode) =>{
+  const clickSave = (mode) => {
     const id = customerIdForm
     const name = customerNameForm
     const password = customerPassForm
     const email = customerEmailForm
-    const newCustomer = {"id":id, "name":name, "email":email, "password":password}
+    const newCustomer = { "id": id, "name": name, "email": email, "password": password }
 
-    if(name === "" || password === "" || email === ""){
+    if (name === "" || password === "" || email === "") {
       console.log("Empty input value")
       return
     }
 
-    if(mode === "Add"){
-      post(newCustomer,setCustomerList)
+    if (mode === "Add") {
+      post(newCustomer, setCustomerList)
       console.log("ADD USER ID: " + newCustomer.id + " NAME: " + newCustomer.name)
-    }else{
+    } else {
       put(id, newCustomer, setCustomerList)
       console.log("UPDATE USER ID: " + newCustomer.id + " NAME: " + newCustomer.name)
     }
@@ -120,15 +120,49 @@ function App() {
   }
 
   return (
-    <div className="App">
 
-        <CustomerList data={customerList} selectUserInForm={selectUserInForm} customerIdForm={customerIdForm}/>
+    <div className="container mt-5">
+      <h1 className="text-center mb-4">Customer Management</h1>
+      <div className="row">
+        <div className="col-md-7">
+          <div className="col-md-9">
+            <CustomerList
+              data={customerList}
+              selectUserInForm={selectUserInForm}
+              customerIdForm={customerIdForm}
+            />
+          </div>
+          <h2></h2>
+          <div className="col-md-9">
+            <CustomerForm
+              customerIdForm={customerIdForm}
+              customerNameForm={customerNameForm}
+              customerEmailForm={customerEmailForm}
+              customerPassForm={customerPassForm}
+              formMode={formMode}
+              handleChangeNameForm={handleChangeNameForm}
+              handleChangeEmailForm={handleChangeEmailForm}
+              handleChangePassForm={handleChangePassForm}
+              clickCancel={clickCancel}
+              clickDelete={clickDelete}
+              clickSave={clickSave}
+            />
+          </div>
+          
+        </div>
 
-        <CustomerForm customerIdForm={customerIdForm} customerNameForm={customerNameForm} customerEmailForm={customerEmailForm} customerPassForm={customerPassForm}
-        formMode={formMode} handleChangeNameForm={handleChangeNameForm} handleChangeEmailForm={handleChangeEmailForm} handleChangePassForm={handleChangePassForm}
-        clickCancel={clickCancel} clickDelete={clickDelete} clickSave={clickSave}/>
-
+      </div>
     </div>
+
+    // <div className="App">
+
+    //     <CustomerList data={customerList} selectUserInForm={selectUserInForm} customerIdForm={customerIdForm}/>
+
+    //     <CustomerForm customerIdForm={customerIdForm} customerNameForm={customerNameForm} customerEmailForm={customerEmailForm} customerPassForm={customerPassForm}
+    //     formMode={formMode} handleChangeNameForm={handleChangeNameForm} handleChangeEmailForm={handleChangeEmailForm} handleChangePassForm={handleChangePassForm}
+    //     clickCancel={clickCancel} clickDelete={clickDelete} clickSave={clickSave}/>
+
+    // </div>
   );
 }
 

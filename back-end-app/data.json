@@ -10,13 +10,7 @@
       "id": 2,
       "name": "Sergio",
       "email": "sergio@gmail.com",
-      "password": "1234"
-    },
-    {
-      "id": 3,
-      "name": "Magesh",
-      "email": "magesh@gmail.com",
-      "password": "1111"
+      "password": "zzzz"
     }
   ]
 }
