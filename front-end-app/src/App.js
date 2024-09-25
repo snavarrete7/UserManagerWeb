@@ -1,6 +1,7 @@
 import './App.css';
 import React from 'react'
 import { deleteById, getAll, get, post, put } from './memdb';
+import CustomerList from './components/CustomerList';
 
 
 function App() {
@@ -119,28 +120,8 @@ function App() {
 
   return (
     <div className="App">
-        <h2>Customer list</h2>
 
-        <table cellPadding="10">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Password</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              customerList.map(customer =>(
-                <tr key={customer.id} onClick={() => selectUserInForm(customer.name, customer.email, customer.password, customer.id)}>
-                  <td style={{ fontWeight: customerIdForm === customer.id ? 'bold' : 'normal' }}>{customer.name}</td>
-                  <td style={{ fontWeight: customerIdForm === customer.id ? 'bold' : 'normal' }}>{customer.email}</td>
-                  <td style={{ fontWeight: customerIdForm === customer.id ? 'bold' : 'normal' }}>{customer.password}</td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
+        <CustomerList data={customerList} selectUserInForm={selectUserInForm} customerIdForm={customerIdForm}/>
 
         <h2>{customerIdForm === "" ? "Add" : "Update"}</h2>
         <form>
