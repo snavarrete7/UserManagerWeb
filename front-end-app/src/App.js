@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react'
-import { getAll } from './memdb';
+import { deleteById, getAll, get } from './memdb';
 
 
 function App() {
@@ -59,6 +59,18 @@ function App() {
     }
   }
 
+  const clickDelete = (id) => {
+    if(id !== ""){
+      const customerDeleted = get(id)
+      console.log('Delete Customer ID: ' + id + " Name: " + customerDeleted.name);
+      deleteById(id);
+      const updatedCustomers = getAll()
+      setCustomerList([...updatedCustomers])
+    }else{
+      console.log("No customer selected")
+    }
+  }
+
   return (
     <div className="App">
         <h2>Customer list</h2>
@@ -101,7 +113,7 @@ function App() {
         </form>
 
         <div name="divButtons" padding="left">
-            <button onClick={() => console.log("Delete")}>Delete</button>
+            <button onClick={() => clickDelete(customerIdForm)}>Delete</button>
             <button onClick={() => console.log("Save")}>Save</button>
             <button onClick={() => clickCancel(customerIdForm)}>Cancel</button>
           </div>
