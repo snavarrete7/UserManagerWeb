@@ -1,13 +1,22 @@
 import './App.css';
 import React from 'react'
+import { getAll } from './memdb';
+
 
 function App() {
 
-  let [customerList, setCustomerList] = React.useState([
-    {"id":"1", "name":"Sergio", "email":"sergio.navarrete@adp.com", "password":"1234"},
-    {"id":"2", "name":"Marc", "email":"marc.cives@adp.com", "password":"3333"},
-    {"id":"3", "name":"Magesh", "email":"magesh.instructor@adp.com", "password":"1010"}
-  ])
+  // let [customerList, setCustomerList] = React.useState([
+  //   {"id":"1", "name":"Sergio", "email":"sergio.navarrete@adp.com", "password":"1234"},
+  //   {"id":"2", "name":"Marc", "email":"marc.cives@adp.com", "password":"3333"},
+  //   {"id":"3", "name":"Magesh", "email":"magesh.instructor@adp.com", "password":"1010"}
+  // ])
+
+  let [customerList, setCustomerList] = React.useState([])
+
+  React.useEffect(() => {
+    const customers = getAll()
+    setCustomerList(customers)
+  }, []);
 
   let [customerIdForm, setCustomerIdForm] = React.useState("")
   let [customerNameForm, setCustomerNameForm] = React.useState("")
