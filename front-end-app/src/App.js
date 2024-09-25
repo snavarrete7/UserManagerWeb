@@ -160,7 +160,7 @@ function App() {
 
         <div name="divButtons" padding="left">
             <button onClick={() => clickDelete(customerIdForm)}>Delete</button>
-            <button onClick={() => clickSave(formMode)}>Save</button>
+            <button onClick={() => clickSave(formMode)}>{customerIdForm === "" ? "Save" : "Update"}</button>
             <button onClick={() => clickCancel(customerIdForm)}>Cancel</button>
           </div>
 
