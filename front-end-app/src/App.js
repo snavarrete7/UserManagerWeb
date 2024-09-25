@@ -16,8 +16,7 @@ function App() {
   let [customerList, setCustomerList] = React.useState([])
 
   React.useEffect(() => {
-    const customers = getAll()
-    setCustomerList(customers)
+    getAll(setCustomerList)
   }, []);
 
   let [customerIdForm, setCustomerIdForm] = React.useState("")
@@ -73,13 +72,14 @@ function App() {
 
   const clickDelete = (id) => {
     if(id !== ""){
-      const customerDeleted = get(id)
-      console.log('Delete Customer ID: ' + id + " Name: " + customerDeleted.name);
-      deleteById(id);
+      // const customerDeleted = get(id)
+      // console.log('Delete Customer ID: ' + id + " Name: " + customerDeleted.name);
+      deleteById(id, setCustomerList);
 
-      const updatedCustomers = getAll()
+      //const updatedCustomers = getAll()
 
-      setCustomerList([...updatedCustomers])
+      //setCustomerList([...updatedCustomers])
+
       setCustomerIdForm("")
       setCustomerNameForm("")
       setCustomerEmailForm("")
@@ -103,15 +103,15 @@ function App() {
     }
 
     if(mode === "Add"){
-      post(newCustomer)
+      post(newCustomer,setCustomerList)
       console.log("ADD USER ID: " + newCustomer.id + " NAME: " + newCustomer.name)
     }else{
-      put(id, newCustomer)
+      put(id, newCustomer, setCustomerList)
       console.log("UPDATE USER ID: " + newCustomer.id + " NAME: " + newCustomer.name)
     }
 
-    const customerListUpdated = getAll()
-    setCustomerList([...customerListUpdated])
+    //const customerListUpdated = getAll()
+    //setCustomerList([...customerListUpdated])
     setCustomerIdForm("")
     setCustomerNameForm("")
     setCustomerEmailForm("")
@@ -127,7 +127,7 @@ function App() {
         <CustomerForm customerIdForm={customerIdForm} customerNameForm={customerNameForm} customerEmailForm={customerEmailForm} customerPassForm={customerPassForm}
         formMode={formMode} handleChangeNameForm={handleChangeNameForm} handleChangeEmailForm={handleChangeEmailForm} handleChangePassForm={handleChangePassForm}
         clickCancel={clickCancel} clickDelete={clickDelete} clickSave={clickSave}/>
-        
+
     </div>
   );
 }

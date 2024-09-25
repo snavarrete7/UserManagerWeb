@@ -1,0 +1,22 @@
+{
+  "customers": [
+    {
+      "id": 1,
+      "name": "Cindy Smiths",
+      "email": "cinds@abc.com",
+      "password": "prueba"
+    },
+    {
+      "id": 2,
+      "name": "Sergio",
+      "email": "sergio@gmail.com",
+      "password": "1234"
+    },
+    {
+      "id": 3,
+      "name": "Magesh",
+      "email": "magesh@gmail.com",
+      "password": "1111"
+    }
+  ]
+}
