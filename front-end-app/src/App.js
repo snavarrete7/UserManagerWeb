@@ -2,6 +2,7 @@ import './App.css';
 import React from 'react'
 import { deleteById, getAll, get, post, put } from './memdb';
 import CustomerList from './components/CustomerList';
+import CustomerForm from './components/CustomerForm';
 
 
 function App() {
@@ -123,30 +124,10 @@ function App() {
 
         <CustomerList data={customerList} selectUserInForm={selectUserInForm} customerIdForm={customerIdForm}/>
 
-        <h2>{customerIdForm === "" ? "Add" : "Update"}</h2>
-        <form>
-          <div>
-            <label>Name:</label>
-            <input type="text" name="name" value={customerNameForm} onChange={handleChangeNameForm} required></input>
-          </div>
-          <div>
-            <label>Email:</label>
-            <input type="email" name="email" value={customerEmailForm} onChange={handleChangeEmailForm} required></input>
-          </div>
-          <div>
-            <label>Password:</label>
-            <input type="text" name="password" value={customerPassForm} onChange={handleChangePassForm} required></input>
-          </div>
-        </form>
-
-        <div name="divButtons" padding="left">
-            <button onClick={() => clickDelete(customerIdForm)}>Delete</button>
-            <button onClick={() => clickSave(formMode)}>{customerIdForm === "" ? "Save" : "Update"}</button>
-            <button onClick={() => clickCancel(customerIdForm)}>Cancel</button>
-          </div>
-
-       
-
+        <CustomerForm customerIdForm={customerIdForm} customerNameForm={customerNameForm} customerEmailForm={customerEmailForm} customerPassForm={customerPassForm}
+        formMode={formMode} handleChangeNameForm={handleChangeNameForm} handleChangeEmailForm={handleChangeEmailForm} handleChangePassForm={handleChangePassForm}
+        clickCancel={clickCancel} clickDelete={clickDelete} clickSave={clickSave}/>
+        
     </div>
   );
 }
