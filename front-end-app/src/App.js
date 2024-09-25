@@ -52,15 +52,21 @@ function App() {
   }
 
   const clickCancel = (id) =>{
-    if(id !== ""){
-      setCustomerNameForm("")
-      setCustomerEmailForm("")
-      setCustomerPassForm("")
-      setCustomerIdForm("")
-      setFormMode("Add")
-    }else{
-      console.log("No customer selected")
-    }
+    // if(id !== ""){
+    //   setCustomerNameForm("")
+    //   setCustomerEmailForm("")
+    //   setCustomerPassForm("")
+    //   setCustomerIdForm("")
+    //   setFormMode("Add")
+    // }else{
+    //   console.log("No customer selected")
+    // }
+    setCustomerNameForm("")
+    setCustomerEmailForm("")
+    setCustomerPassForm("")
+    setCustomerIdForm("")
+    setFormMode("Add")
+
   }
 
   const clickDelete = (id) => {
@@ -88,6 +94,11 @@ function App() {
     const password = customerPassForm
     const email = customerEmailForm
     const newCustomer = {"id":id, "name":name, "email":email, "password":password}
+
+    if(name === "" || password === "" || email === ""){
+      console.log("Empty input value")
+      return
+    }
 
     if(mode === "Add"){
       post(newCustomer)
@@ -135,15 +146,15 @@ function App() {
         <form>
           <div>
             <label>Name:</label>
-            <input type="text" name="name" value={customerNameForm} onChange={handleChangeNameForm}></input>
+            <input type="text" name="name" value={customerNameForm} onChange={handleChangeNameForm} required></input>
           </div>
           <div>
             <label>Email:</label>
-            <input type="email" name="email" value={customerEmailForm} onChange={handleChangeEmailForm}></input>
+            <input type="email" name="email" value={customerEmailForm} onChange={handleChangeEmailForm} required></input>
           </div>
           <div>
             <label>Password:</label>
-            <input type="text" name="password" value={customerPassForm} onChange={handleChangePassForm}></input>
+            <input type="text" name="password" value={customerPassForm} onChange={handleChangePassForm} required></input>
           </div>
         </form>
 
