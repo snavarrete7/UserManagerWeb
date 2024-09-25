@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react'
-import { deleteById, getAll, get } from './memdb';
+import { deleteById, getAll, get, post, put } from './memdb';
 
 
 function App() {
@@ -23,6 +23,7 @@ function App() {
   let [customerEmailForm, setCustomerEmailForm] = React.useState("")
   let [customerPassForm, setCustomerPassForm] = React.useState("")
 
+  let[formMode, setFormMode] = React.useState("Add")
 
   const selectUserInForm = (name, email, pass, id) =>{
     if(id === customerIdForm){
@@ -30,11 +31,13 @@ function App() {
       setCustomerEmailForm("")
       setCustomerPassForm("")
       setCustomerIdForm("")
+      setFormMode("Add")
     }else{
       setCustomerNameForm(name)
       setCustomerEmailForm(email)
       setCustomerPassForm(pass)
       setCustomerIdForm(id)
+      setFormMode("Update")
     }
   }
 
@@ -54,6 +57,7 @@ function App() {
       setCustomerEmailForm("")
       setCustomerPassForm("")
       setCustomerIdForm("")
+      setFormMode("Add")
     }else{
       console.log("No customer selected")
     }
@@ -64,11 +68,42 @@ function App() {
       const customerDeleted = get(id)
       console.log('Delete Customer ID: ' + id + " Name: " + customerDeleted.name);
       deleteById(id);
+
       const updatedCustomers = getAll()
+
       setCustomerList([...updatedCustomers])
+      setCustomerIdForm("")
+      setCustomerNameForm("")
+      setCustomerEmailForm("")
+      setCustomerPassForm("")
+      setFormMode("Add")
     }else{
       console.log("No customer selected")
     }
+  }
+
+  const clickSave = (mode) =>{
+    const id = customerIdForm
+    const name = customerNameForm
+    const password = customerPassForm
+    const email = customerEmailForm
+    const newCustomer = {"id":id, "name":name, "email":email, "password":password}
+
+    if(mode === "Add"){
+      post(newCustomer)
+      console.log("ADD USER ID: " + newCustomer.id + " NAME: " + newCustomer.name)
+    }else{
+      put(id, newCustomer)
+      console.log("UPDATE USER ID: " + newCustomer.id + " NAME: " + newCustomer.name)
+    }
+
+    const customerListUpdated = getAll()
+    setCustomerList([...customerListUpdated])
+    setCustomerIdForm("")
+    setCustomerNameForm("")
+    setCustomerEmailForm("")
+    setCustomerPassForm("")
+    setFormMode("Add")
   }
 
   return (
@@ -96,7 +131,7 @@ function App() {
           </tbody>
         </table>
 
-        <h2>Update</h2>
+        <h2>{customerIdForm === "" ? "Add" : "Update"}</h2>
         <form>
           <div>
             <label>Name:</label>
@@ -114,7 +149,7 @@ function App() {
 
         <div name="divButtons" padding="left">
             <button onClick={() => clickDelete(customerIdForm)}>Delete</button>
-            <button onClick={() => console.log("Save")}>Save</button>
+            <button onClick={() => clickSave(formMode)}>Save</button>
             <button onClick={() => clickCancel(customerIdForm)}>Cancel</button>
           </div>
 
