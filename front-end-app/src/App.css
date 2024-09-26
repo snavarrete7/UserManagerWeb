@@ -8,6 +8,10 @@ h1 {
   color: #007bff;
 }
 
+h2 {
+  color: #ffffff;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

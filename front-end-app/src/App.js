@@ -3,15 +3,11 @@ import React from 'react'
 import { deleteById, getAll, get, post, put } from './memdb';
 import CustomerList from './components/CustomerList';
 import CustomerForm from './components/CustomerForm';
+import Navbar from './components/Navbar';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
 function App() {
-
-  // let [customerList, setCustomerList] = React.useState([
-  //   {"id":"1", "name":"Sergio", "email":"sergio.navarrete@adp.com", "password":"1234"},
-  //   {"id":"2", "name":"Marc", "email":"marc.cives@adp.com", "password":"3333"},
-  //   {"id":"3", "name":"Magesh", "email":"magesh.instructor@adp.com", "password":"1010"}
-  // ])
 
   let [customerList, setCustomerList] = React.useState([])
 
@@ -53,15 +49,6 @@ function App() {
   }
 
   const clickCancel = (id) => {
-    // if(id !== ""){
-    //   setCustomerNameForm("")
-    //   setCustomerEmailForm("")
-    //   setCustomerPassForm("")
-    //   setCustomerIdForm("")
-    //   setFormMode("Add")
-    // }else{
-    //   console.log("No customer selected")
-    // }
     setCustomerNameForm("")
     setCustomerEmailForm("")
     setCustomerPassForm("")
@@ -72,13 +59,8 @@ function App() {
 
   const clickDelete = (id) => {
     if (id !== "") {
-      // const customerDeleted = get(id)
-      // console.log('Delete Customer ID: ' + id + " Name: " + customerDeleted.name);
+
       deleteById(id, setCustomerList);
-
-      //const updatedCustomers = getAll()
-
-      //setCustomerList([...updatedCustomers])
 
       setCustomerIdForm("")
       setCustomerNameForm("")
@@ -110,8 +92,6 @@ function App() {
       console.log("UPDATE USER ID: " + newCustomer.id + " NAME: " + newCustomer.name)
     }
 
-    //const customerListUpdated = getAll()
-    //setCustomerList([...customerListUpdated])
     setCustomerIdForm("")
     setCustomerNameForm("")
     setCustomerEmailForm("")
@@ -120,49 +100,41 @@ function App() {
   }
 
   return (
+    <Router>
+      <div className="container mt-5">
+        <Navbar formMode={formMode}/>
+        <div className="row">
+          <div className="col-md-9">
+            <div className="col-md-9">
+              <CustomerList
+                data={customerList}
+                selectUserInForm={selectUserInForm}
+                customerIdForm={customerIdForm}
+              />
+            </div>
+            <h2></h2>
+            <div className="col-md-9">
+              <CustomerForm
+                customerIdForm={customerIdForm}
+                customerNameForm={customerNameForm}
+                customerEmailForm={customerEmailForm}
+                customerPassForm={customerPassForm}
+                formMode={formMode}
+                handleChangeNameForm={handleChangeNameForm}
+                handleChangeEmailForm={handleChangeEmailForm}
+                handleChangePassForm={handleChangePassForm}
+                clickCancel={clickCancel}
+                clickDelete={clickDelete}
+                clickSave={clickSave}
+              />
+            </div>
+            
+          </div>
 
-    <div className="container mt-5">
-      <h1 className="text-center mb-4">Customer Management</h1>
-      <div className="row">
-        <div className="col-md-7">
-          <div className="col-md-9">
-            <CustomerList
-              data={customerList}
-              selectUserInForm={selectUserInForm}
-              customerIdForm={customerIdForm}
-            />
-          </div>
-          <h2></h2>
-          <div className="col-md-9">
-            <CustomerForm
-              customerIdForm={customerIdForm}
-              customerNameForm={customerNameForm}
-              customerEmailForm={customerEmailForm}
-              customerPassForm={customerPassForm}
-              formMode={formMode}
-              handleChangeNameForm={handleChangeNameForm}
-              handleChangeEmailForm={handleChangeEmailForm}
-              handleChangePassForm={handleChangePassForm}
-              clickCancel={clickCancel}
-              clickDelete={clickDelete}
-              clickSave={clickSave}
-            />
-          </div>
-          
         </div>
-
       </div>
-    </div>
+    </Router>
 
-    // <div className="App">
-
-    //     <CustomerList data={customerList} selectUserInForm={selectUserInForm} customerIdForm={customerIdForm}/>
-
-    //     <CustomerForm customerIdForm={customerIdForm} customerNameForm={customerNameForm} customerEmailForm={customerEmailForm} customerPassForm={customerPassForm}
-    //     formMode={formMode} handleChangeNameForm={handleChangeNameForm} handleChangeEmailForm={handleChangeEmailForm} handleChangePassForm={handleChangePassForm}
-    //     clickCancel={clickCancel} clickDelete={clickDelete} clickSave={clickSave}/>
-
-    // </div>
   );
 }
 

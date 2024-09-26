@@ -4,13 +4,19 @@
       "id": 1,
       "name": "Cindy Smiths",
       "email": "cinds@abc.com",
-      "password": "prueba"
+      "password": "prueba3"
     },
     {
       "id": 2,
       "name": "Sergio",
       "email": "sergio@gmail.com",
       "password": "zzzz"
+    },
+    {
+      "id": 3,
+      "name": "Prueba",
+      "email": "prueba@gmail.com",
+      "password": "prueba"
     }
   ]
 }

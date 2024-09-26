@@ -1,0 +1,42 @@
+.navbar {
+    background-color: #007bff;
+    padding: 1rem;
+  }
+  
+  .navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .navbar-title {
+    color: white;
+    margin: 0;
+  }
+  
+  .navbar-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .navbar-links li {
+    display: inline;
+  }
+  
+  .nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+  }
+  
+  .nav-link:hover {
+    text-decoration: underline;
+  }
+  
+  .navbar-search input {
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
