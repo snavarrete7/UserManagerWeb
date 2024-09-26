@@ -1,6 +1,6 @@
 const baseURL = "http://localhost:4000/customers";
 
-export async function getAll(setCustomerList) {
+export async function getAll(setCustomerList, setNCustomers) {
     const myInit = {
         method: 'GET',
         mode: 'cors'
@@ -13,6 +13,7 @@ export async function getAll(setCustomerList) {
             }
             const data = await response.json();
             setCustomerList(data);
+            setNCustomers(data.length)
         } catch (error) {
             alert(error);
         }
@@ -21,7 +22,7 @@ export async function getAll(setCustomerList) {
 }
 
 
-export async function deleteById(id, setCustomerList) {
+export async function deleteById(id, setCustomerList, setNCustomers) {
 
     const myInit = {
         method: 'DELETE',
@@ -34,7 +35,7 @@ export async function deleteById(id, setCustomerList) {
             throw new Error(`Error deleting customer: ${response.status}`);
         }
     
-        getAll(setCustomerList)
+        getAll(setCustomerList, setNCustomers)
 
     } catch (error) {
         alert(`Error: ${error.message}`);
@@ -42,7 +43,7 @@ export async function deleteById(id, setCustomerList) {
 
 }
 
-export async function post(item, setCustomerList) {
+export async function post(item, setCustomerList, setNCustomers) {
 
     const myInit = {
         method: 'POST',
@@ -59,7 +60,7 @@ export async function post(item, setCustomerList) {
             throw new Error(`Error adding customer: ${response.status}`);
         }
 
-        getAll(setCustomerList)
+        getAll(setCustomerList, setNCustomers)
 
     } catch (error) {
         alert(`Error: ${error.message}`);
@@ -67,7 +68,7 @@ export async function post(item, setCustomerList) {
 
 }
 
-export async function put(id, item, setCustomerList) {
+export async function put(id, item, setCustomerList, setNCustomers) {
 
     const myInit = {
         method: 'PUT',
@@ -84,7 +85,7 @@ export async function put(id, item, setCustomerList) {
             throw new Error(`Error updating customer: ${response.status}`);
         }
 
-        getAll(setCustomerList)
+        getAll(setCustomerList, setNCustomers)
 
     } catch (error) {
         alert(`Error: ${error.message}`);

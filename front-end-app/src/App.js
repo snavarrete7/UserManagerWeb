@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react'
-import { deleteById, getAll, get, post, put } from './memdb';
+import { deleteById, getAll, post, put } from './memdb';
 import CustomerList from './components/CustomerList';
 import CustomerForm from './components/CustomerForm';
 import Navbar from './components/Navbar';
@@ -10,9 +10,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 function App() {
 
   let [customerList, setCustomerList] = React.useState([])
+  let [nCustomers, setNCustomers] = React.useState(0)
 
   React.useEffect(() => {
-    getAll(setCustomerList)
+    getAll(setCustomerList, setNCustomers)
   }, []);
 
   let [customerIdForm, setCustomerIdForm] = React.useState("")
@@ -60,7 +61,7 @@ function App() {
   const clickDelete = (id) => {
     if (id !== "") {
 
-      deleteById(id, setCustomerList);
+      deleteById(id, setCustomerList, setNCustomers);
 
       setCustomerIdForm("")
       setCustomerNameForm("")
@@ -85,10 +86,10 @@ function App() {
     }
 
     if (mode === "Add") {
-      post(newCustomer, setCustomerList)
+      post(newCustomer, setCustomerList, setNCustomers)
       console.log("ADD USER ID: " + newCustomer.id + " NAME: " + newCustomer.name)
     } else {
-      put(id, newCustomer, setCustomerList)
+      put(id, newCustomer, setCustomerList, setNCustomers)
       console.log("UPDATE USER ID: " + newCustomer.id + " NAME: " + newCustomer.name)
     }
 
@@ -102,33 +103,46 @@ function App() {
   return (
     <Router>
       <div className="container mt-5">
-        <Navbar formMode={formMode}/>
+        <Navbar formMode={formMode} />
         <div className="row">
-          <div className="col-md-9">
-            <div className="col-md-9">
-              <CustomerList
-                data={customerList}
-                selectUserInForm={selectUserInForm}
-                customerIdForm={customerIdForm}
+          <div className="col-md-10">
+            <Routes>
+              <Route
+                path='/'
+                element={
+                  <div className="col-md-9">
+                  <CustomerList
+                    data={customerList}
+                    selectUserInForm={selectUserInForm}
+                    customerIdForm={customerIdForm}
+                    nCustomers={nCustomers}
+                  />
+                  </div>
+                }
               />
-            </div>
-            <h2></h2>
-            <div className="col-md-9">
-              <CustomerForm
-                customerIdForm={customerIdForm}
-                customerNameForm={customerNameForm}
-                customerEmailForm={customerEmailForm}
-                customerPassForm={customerPassForm}
-                formMode={formMode}
-                handleChangeNameForm={handleChangeNameForm}
-                handleChangeEmailForm={handleChangeEmailForm}
-                handleChangePassForm={handleChangePassForm}
-                clickCancel={clickCancel}
-                clickDelete={clickDelete}
-                clickSave={clickSave}
+
+              <Route
+                path='/add'
+                element={
+                  <div className="col-md-9">
+                  <CustomerForm
+                    customerIdForm={customerIdForm}
+                    customerNameForm={customerNameForm}
+                    customerEmailForm={customerEmailForm}
+                    customerPassForm={customerPassForm}
+                    formMode={formMode}
+                    handleChangeNameForm={handleChangeNameForm}
+                    handleChangeEmailForm={handleChangeEmailForm}
+                    handleChangePassForm={handleChangePassForm}
+                    clickCancel={clickCancel}
+                    clickDelete={clickDelete}
+                    clickSave={clickSave}
+                    setNCustomers={setNCustomers}
+                  />
+                </div>
+                }
               />
-            </div>
-            
+            </Routes>
           </div>
 
         </div>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const CustomerForm = (props) => {
   return (
@@ -22,7 +23,8 @@ const CustomerForm = (props) => {
         <div name="divButtons" padding="left" className="d-flex justify-content-between mt-4">
             <button className="btn btn-danger" onClick={() => props.clickDelete(props.customerIdForm)}>Delete</button>
             <button className="btn btn-primary" onClick={() => props.clickSave(props.formMode)}>{props.customerIdForm === "" ? "Save" : "Update"}</button>
-            <button className="btn btn-secondary" onClick={() => props.clickCancel(props.customerIdForm)}>Cancel</button>
+            {/* <button className="btn btn-secondary" onClick={() => props.clickCancel(props.customerIdForm)}>Cancel</button> */}
+            <Link to="/" className="btn btn-secondary" onClick={() => props.clickCancel(props.customerIdForm)}>Cancel</Link>
           </div>
     </div>
   )
