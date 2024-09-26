@@ -23,6 +23,8 @@ function App() {
 
   let [formMode, setFormMode] = React.useState("Add")
 
+  let [searchTerm, setSearchTerm] = React.useState("")
+
   const selectUserInForm = (name, email, pass, id) => {
     if (id === customerIdForm) {
       setCustomerNameForm("")
@@ -47,6 +49,10 @@ function App() {
   }
   const handleChangePassForm = (e) => {
     setCustomerPassForm(e.target.value)
+  }
+
+  const handleSearchTerm = (e) => {
+    setSearchTerm(e.target.value)
   }
 
   const clickCancel = (id) => {
@@ -100,10 +106,14 @@ function App() {
     setFormMode("Add")
   }
 
+  const filteredCustomers = customerList.filter(customer => 
+    customer.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <Router>
       <div className="container mt-5">
-        <Navbar formMode={formMode} />
+        <Navbar formMode={formMode} handleSearchTerm={handleSearchTerm}/>
         <div className="row">
           <div className="col-md-10">
             <Routes>
@@ -112,10 +122,10 @@ function App() {
                 element={
                   <div className="col-md-9">
                   <CustomerList
-                    data={customerList}
+                    data={filteredCustomers}
                     selectUserInForm={selectUserInForm}
                     customerIdForm={customerIdForm}
-                    nCustomers={nCustomers}
+                    nCustomers={filteredCustomers.length}
                   />
                   </div>
                 }

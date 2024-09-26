@@ -4,7 +4,7 @@
       "id": 1,
       "name": "Sergio",
       "email": "sergioey700@icloud.com",
-      "password": "sergiosergio"
+      "password": "sergiosergiosergio"
     },
     {
       "id": 2,
@@ -16,13 +16,13 @@
       "id": 3,
       "name": "Joane",
       "email": "jblues2@hatena.ne.jp",
-      "password": "vV6<gp#I$zG6d<o"
+      "password": "joane"
     },
     {
       "id": 4,
       "name": "Phebe",
       "email": "pkillingsworth3@mapy.cz",
-      "password": "vG1}u'xRzYU7"
+      "password": "phebe"
     },
     {
       "id": 5,
@@ -605,6 +605,12 @@
       "name": "mock2",
       "email": "marc.cives@adp.com",
       "password": "3333"
+    },
+    {
+      "id": 102,
+      "name": "new",
+      "email": "new@gmail.com",
+      "password": "newnew2"
     }
   ]
 }
