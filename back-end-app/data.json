@@ -25,12 +25,6 @@
       "password": "phebe"
     },
     {
-      "id": 5,
-      "name": "Stacie",
-      "email": "sdecruz4@buzzfeed.com",
-      "password": "jN0'k?O>R#(!+,H$"
-    },
-    {
       "id": 6,
       "name": "Rodd",
       "email": "revensden5@flickr.com",
@@ -40,7 +34,7 @@
       "id": 7,
       "name": "Zaccaria",
       "email": "zcrofts6@ucoz.com",
-      "password": "jR5&'79UbB"
+      "password": "zacaria"
     },
     {
       "id": 8,
@@ -443,12 +437,6 @@
       "name": "Abie",
       "email": "ayorston21@goo.ne.jp",
       "password": "dM9_\\ah03LIc{D"
-    },
-    {
-      "id": 75,
-      "name": "Shandeigh",
-      "email": "sdewsnap22@msu.edu",
-      "password": "iK8<9ncER+MfBKwG"
     },
     {
       "id": 76,

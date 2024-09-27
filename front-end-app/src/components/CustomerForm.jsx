@@ -7,16 +7,16 @@ const CustomerForm = (props) => {
         <h2 className="mb-4">{props.customerIdForm === "" ? "Add" : "Update"}</h2>
         <form>
           <div className="form-group">
-            <label>Name:</label>
-            <input type="text" name="name" className="form-control" value={props.customerNameForm} onChange={props.handleChangeNameForm} required></input>
+            <label htmlFor='name'>Name:</label>
+            <input id="name" type="text" name="name" className="form-control" value={props.customerNameForm} onChange={props.handleChangeNameForm} required></input>
           </div>
           <div className="form-group">
-            <label>Email:</label>
-            <input type="email" name="email" className="form-control" value={props.customerEmailForm} onChange={props.handleChangeEmailForm} required></input>
+            <label htmlFor='email'>Email:</label>
+            <input id='email' type="email" name="email" className="form-control" value={props.customerEmailForm} onChange={props.handleChangeEmailForm} required></input>
           </div>
           <div className="form-group">
-            <label>Password:</label>
-            <input type="text" name="password" className="form-control" value={props.customerPassForm} onChange={props.handleChangePassForm} required></input>
+            <label htmlFor='password'>Password:</label>
+            <input id='password' type="text" name="password" className="form-control" value={props.customerPassForm} onChange={props.handleChangePassForm} required></input>
           </div>
         </form>
 
