@@ -5,8 +5,10 @@ UserManager is a robust and intuitive application designed to streamline custome
 
 ### Move to the folder /front-end-app
 **npm install**
+
 **npm run start**
 
 ### Move to the folder /back-end-app
 **npm install**
+
 **npm run start**
